@@ -8,7 +8,7 @@ const Header = () => {
     <header>
       <Container>
         <h1>
-          WWDC Emoji Creator
+          WWDC Memoji Creator
         </h1>
         <ul>
           <li>
