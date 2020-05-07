@@ -15,7 +15,7 @@ import wwdcOverlay from 'assets/images/wwdc-overlay.png';
 const canvasWidth = 600;
 const canvasHeight = 600;
 const memojiDefaultWidth = 500;
-const memojiDefaultY = -100;
+const memojiDefaultY = -92;
 
 const IndexPage = () => {
   const canvasRef = useRef();
