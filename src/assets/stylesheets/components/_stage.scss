@@ -22,6 +22,7 @@
     color: lighten($color-ultraviolet, 70);
     padding: 1em;
     background-color: lighten($color-ultraviolet, 30);
+    border: dashed 2px $color-ultraviolet;
     cursor: pointer;
 
     p {
@@ -30,9 +31,18 @@
 
   }
 
-  // input,
-  // .button {
-  //   width: 100%;
-  // }
+  .form-row-range {
+
+    label {
+      margin: 0 -.5em 1.4em;
+    }
+
+    padding: 0 .5em;
+
+  }
+
+  .input-range {
+    margin-bottom: 2.6em;
+  }
 
 }

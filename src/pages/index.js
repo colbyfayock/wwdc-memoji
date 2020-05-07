@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
+import InputRange from 'react-input-range';
+import 'react-input-range/lib/css/index.css';
 
 import { promiseToLoadImage } from 'lib/images';
 
@@ -23,6 +25,7 @@ const IndexPage = () => {
     url: defaultMemoji,
     width: memojiDefaultWidth
   });
+  const memojiSize = Math.round(memoji?.width / memojiDefaultWidth * 100);
 
   const [downloadUrl, updateDownloadUrl] = useState();
 
@@ -72,9 +75,23 @@ const IndexPage = () => {
    * handleOnChange
    */
 
-  function handleOnChange({ currentTarget } = {}) {
-    const value = parseInt(currentTarget.value);
-    const name = currentTarget.name;
+  function handleOnChangeX(value) {
+    handleOnChangeValueByName('x', value);
+  }
+
+  /**
+   * handleOnChange
+   */
+
+  function handleOnChangeY(value) {
+    handleOnChangeValueByName('y', value);
+  }
+
+  /**
+   * handleOnChangeValueByName
+   */
+
+  function handleOnChangeValueByName(name, value) {
     updateMemoji(prev => {
       return {
         ...prev,
@@ -87,20 +104,18 @@ const IndexPage = () => {
    * handleOnChangeSize
    */
 
-  function handleOnChangeSize({ currentTarget } = {}) {
-    const value = parseInt(currentTarget.value) / 100;
-
+  function handleOnChangeSize(value) {
+    const multiplier = value / 100;
     const ratio = memojiDefaultWidth / memoji?.width;
-    const width = memojiDefaultWidth * value;
-    const height = ( memoji?.height * ratio ) * value;
-
+    const width = memojiDefaultWidth * multiplier;
+    const height = ( memoji?.height * ratio ) * multiplier;
     updateMemoji(prev => {
       return {
         ...prev,
         width,
         height
       }
-    })
+    });
   }
 
   /**
@@ -156,17 +171,35 @@ const IndexPage = () => {
               <div className="form-row">
                 <Dropzone onDrop={handleOnDrop} />
               </div>
-              <div className="form-row">
+              <div className="form-row form-row-range">
                 <label htmlFor="size">Size (%)</label>
-                <input id="size" type="number" name="size" defaultValue={100} onChange={handleOnChangeSize} />
+                <InputRange
+                  name="size"
+                  maxValue={200}
+                  minValue={0}
+                  step={1}
+                  value={memojiSize}
+                  onChange={handleOnChangeSize} />
               </div>
-              <div className="form-row">
+              <div className="form-row form-row-range">
                 <label htmlFor="x">Position X (Distance from left edge)</label>
-                <input id="x" type="number" name="x" defaultValue={memoji?.x} onChange={handleOnChange} />
+                <InputRange
+                  name="x"
+                  maxValue={200}
+                  minValue={-200}
+                  step={1}
+                  value={Math.round(memoji?.x)}
+                  onChange={handleOnChangeX} />
               </div>
-              <div className="form-row">
+              <div className="form-row form-row-range">
                 <label htmlFor="y">Position Y (Distance from top edge)</label>
-                <input id="y" type="number" name="y" defaultValue={memoji?.y} onChange={handleOnChange} />
+                <InputRange
+                  name="y"
+                  maxValue={200}
+                  minValue={-200}
+                  step={1}
+                  value={Math.round(memoji?.y)}
+                  onChange={handleOnChangeY} />
               </div>
             </form>
             <p>
