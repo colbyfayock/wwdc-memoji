@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Container = ({children}) => {
+const Container = ({children, type}) => {
+  let containerClass = 'container';
+
+  if ( type ) {
+    containerClass = `${containerClass} container-${type}`;
+  }
+
   return (
-    <div className="container">
+    <div className={containerClass}>
       { children }
     </div>
   );

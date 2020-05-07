@@ -13,7 +13,7 @@ const Header = () => {
         <ul>
           <li>
             <a href="https://github.com/colbyfayock/wwdc-memoji">
-              <FaGithub /> Github
+              <FaGithub /> View on Github
             </a>
           </li>
         </ul>

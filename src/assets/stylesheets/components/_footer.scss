@@ -1,10 +1,11 @@
 footer {
 
   width: 100%;
-  height: 2em;
-  line-height: 2em;
   text-align: center;
   background-color: black;
+  padding: .5em 0;
+  border-top: solid 1px lighten(black, 10);
+  margin-top: 2em;
 
   p,
   a {

@@ -1,9 +1,14 @@
 .stage {
   display: flex;
+  width: calc(600px + 20em);
+  background-color: lighten(black, 10);
+  padding: 1em;
+  margin: 0 auto;
 }
 
 .stage-panel {
 
+  width: 20em;
   background-color: $color-ultraviolet;
   padding: 1em;
   margin-left: 1em;

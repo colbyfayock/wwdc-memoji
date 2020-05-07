@@ -148,7 +148,7 @@ const IndexPage = () => {
       <Helmet>
         <title>Home Page</title>
       </Helmet>
-      <Container>
+      <Container type="full">
         <div className="stage">
           <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}  />
           <div className="stage-panel">
