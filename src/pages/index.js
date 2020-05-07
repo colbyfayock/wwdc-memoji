@@ -9,22 +9,27 @@ import Layout from 'components/Layout';
 import Container from 'components/Container';
 import Dropzone from 'components/Dropzone';
 
-import defaultMemoji from 'assets/images/colby-memoji.jpg';
+import defaultMemojiUrl from 'assets/images/colby-memoji.jpg';
 import wwdcOverlay from 'assets/images/wwdc-overlay.png';
 
 const canvasWidth = 600;
 const canvasHeight = 600;
-const memojiDefaultWidth = 500;
-const memojiDefaultY = -92;
+const memojiDefaultWidth = 560;
+const memojiDefaultX = 15;
+const memojiDefaultY = -97;
+
+const defaultMemoji = {
+  url: defaultMemojiUrl,
+  width: memojiDefaultWidth,
+  x: memojiDefaultX,
+  y: memojiDefaultY
+}
 
 const IndexPage = () => {
   const canvasRef = useRef();
 
   const memojiImgRef = useRef();
-  const [memoji, updateMemoji] = useState({
-    url: defaultMemoji,
-    width: memojiDefaultWidth
-  });
+  const [memoji, updateMemoji] = useState(defaultMemoji);
   const memojiSize = Math.round(memoji?.width / memojiDefaultWidth * 100);
 
   const [downloadUrl, updateDownloadUrl] = useState();
@@ -36,6 +41,7 @@ const IndexPage = () => {
       });
 
       updateImageState(img, {
+        ...defaultMemoji,
         url: memoji.url
       });
     }
@@ -144,8 +150,8 @@ const IndexPage = () => {
     const imgRatio = imgWidth / image?.width;
     const imgHeight = image?.height * imgRatio;
 
-    const x = ( canvasWidth - imgWidth ) / 2;
-    const y = ( ( canvasHeight - imgHeight ) / 2 ) + memojiDefaultY;
+    const x = settings?.x || ( canvasWidth - imgWidth ) / 2;
+    const y = settings?.y || ( canvasHeight - imgHeight ) / 2;
 
     memojiImgRef.current = image;
 
