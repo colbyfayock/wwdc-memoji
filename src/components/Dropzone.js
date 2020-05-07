@@ -19,8 +19,8 @@ const Dropzone = ({ onDrop }) => {
       <input {...getInputProps()} />
       {
         isDragActive ?
-          <p>Drop the files here ...</p> :
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p>Drag 'n' drop your Memoji here</p> :
+          <p>Drag 'n' drop your Memoji here or click to select the file</p>
       }
     </div>
   )

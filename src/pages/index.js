@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 
+import { promiseToLoadImage } from 'lib/images';
+
 import Layout from 'components/Layout';
 import Container from 'components/Container';
 import Dropzone from 'components/Dropzone';
@@ -10,22 +12,8 @@ import wwdcOverlay from 'assets/images/wwdc-overlay.png';
 
 const canvasWidth = 600;
 const canvasHeight = 600;
-const memojiDefaultWidth = 400;
-
-function promiseToLoadImage({ url }) {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-
-    image.onload = function(data) {
-      resolve({
-        img: this,
-        data
-      })
-    }
-
-    image.src = url;
-  })
-}
+const memojiDefaultWidth = 500;
+const memojiDefaultY = -100;
 
 const IndexPage = () => {
   const canvasRef = useRef();
@@ -115,6 +103,10 @@ const IndexPage = () => {
     })
   }
 
+  /**
+   * handleOnDrop
+   */
+
   function handleOnDrop(files) {
     const fileUrl = URL.createObjectURL(files[0]);
     const image = new Image();
@@ -128,13 +120,17 @@ const IndexPage = () => {
     image.src = fileUrl;
   }
 
+  /**
+   * updateImageState
+   */
+
   function updateImageState(image, settings = {}) {
     const imgWidth = memoji?.width;
     const imgRatio = imgWidth / image?.width;
     const imgHeight = image?.height * imgRatio;
 
     const x = ( canvasWidth - imgWidth ) / 2;
-    const y = ( canvasHeight - imgHeight ) / 2;
+    const y = ( ( canvasHeight - imgHeight ) / 2 ) + memojiDefaultY;
 
     memojiImgRef.current = image;
 
