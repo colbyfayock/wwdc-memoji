@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 
 import Layout from 'components/Layout';
 import Container from 'components/Container';
+import Dropzone from 'components/Dropzone';
 
 import defaultMemoji from 'assets/images/colby-memoji.jpg';
 import wwdcOverlay from 'assets/images/wwdc-overlay.png';
@@ -43,23 +44,10 @@ const IndexPage = () => {
         url: memoji.url
       });
 
-      const imgWidth = memoji?.width;
-      const imgRatio = imgWidth / img?.width;
-      const imgHeight = img?.height * imgRatio;
-
-      const x = ( canvasWidth - imgWidth ) / 2;
-      const y = ( canvasHeight - imgHeight ) / 2;
-
-      updateMemoji({
-        width: imgWidth,
-        height: imgHeight,
-        x,
-        y
+      updateImageState(img, {
+        url: memoji.url
       });
-
-      memojiImgRef.current = img;
     }
-
     loadImages();
   }, [memojiImgRef, memoji.url])
 
@@ -127,6 +115,38 @@ const IndexPage = () => {
     })
   }
 
+  function handleOnDrop(files) {
+    const fileUrl = URL.createObjectURL(files[0]);
+    const image = new Image();
+
+    image.onload = function() {
+      updateImageState(image, {
+        url: fileUrl
+      })
+    }
+
+    image.src = fileUrl;
+  }
+
+  function updateImageState(image, settings = {}) {
+    const imgWidth = memoji?.width;
+    const imgRatio = imgWidth / image?.width;
+    const imgHeight = image?.height * imgRatio;
+
+    const x = ( canvasWidth - imgWidth ) / 2;
+    const y = ( canvasHeight - imgHeight ) / 2;
+
+    memojiImgRef.current = image;
+
+    updateMemoji({
+      width: imgWidth,
+      height: imgHeight,
+      x,
+      y,
+      ...settings
+    });
+  }
+
   return (
     <Layout pageName="home">
       <Helmet>
@@ -137,6 +157,9 @@ const IndexPage = () => {
           <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}  />
           <div className="stage-panel">
             <form>
+              <div className="form-row">
+                <Dropzone onDrop={handleOnDrop} />
+              </div>
               <div className="form-row">
                 <label htmlFor="size">Size (%)</label>
                 <input id="size" type="number" name="size" defaultValue={100} onChange={handleOnChangeSize} />

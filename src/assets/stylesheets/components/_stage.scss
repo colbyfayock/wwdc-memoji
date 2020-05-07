@@ -12,6 +12,18 @@
     width: 100%;
   }
 
+  .dropzone {
+
+    color: lighten($color-ultraviolet, 70);
+    padding: 1em;
+    background-color: lighten($color-ultraviolet, 30);
+
+    p {
+      font-size: .9em;
+    }
+
+  }
+
   // input,
   // .button {
   //   width: 100%;
