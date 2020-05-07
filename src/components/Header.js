@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'gatsby';
+import { FaGithub } from 'react-icons/fa';
 
 import Container from 'components/Container';
 
@@ -7,15 +7,14 @@ const Header = () => {
   return (
     <header>
       <Container>
-        <p>
-          My Gatsby Site
-        </p>
+        <h1>
+          WWDC Emoji Creator
+        </h1>
         <ul>
           <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/page-2/">Page 2</Link>
+            <a href="https://github.com/colbyfayock/wwdc-memoji">
+              <FaGithub /> Github
+            </a>
           </li>
         </ul>
       </Container>

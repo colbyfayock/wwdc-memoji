@@ -1,14 +1,18 @@
 footer {
-  
+
   width: 100%;
   height: 2em;
   line-height: 2em;
-  color: white;
   text-align: center;
-  background-color: darkgray;
+  background-color: black;
+
+  p,
+  a {
+    color: grey;
+  }
 
   p {
-    font-size: 1em;
+    font-size: .9em;
     margin: 0;
   }
 

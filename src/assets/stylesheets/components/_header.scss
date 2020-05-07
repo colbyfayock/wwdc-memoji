@@ -2,13 +2,19 @@ header {
 
   width: 100%;
   color: white;
-  background-color: rebeccapurple;
+  background-color: black;
 
   .container {
     display: flex;
     justify-content: space-between;
     height: 4em;
     line-height: 4em;
+  }
+
+  h1 {
+    color: white;
+    font-size: 1em;
+    margin: 0;
   }
 
   ul {
@@ -22,16 +28,17 @@ header {
   }
 
   a {
-    display: block;
-    color: white;
-    opacity: .8;
-    padding: 0 .5em;
-  }
 
-  p {
-    font-size: 2em;
-    font-weight: bold;
-    margin: 0;
+    display: flex;
+    align-items: center;
+    color: grey;
+    text-decoration: none;
+    padding: 0 .5em;
+
+    svg {
+      margin-right: .4em;
+    }
+
   }
 
 }

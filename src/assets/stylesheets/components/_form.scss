@@ -1,0 +1,25 @@
+.form-row {
+
+  margin-bottom: 1em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+}
+
+input {
+  height: 2em;
+  font-size: 1.2em;
+  padding: 0 .8em;
+  border: none;
+}
+
+label {
+  display: block;
+  color: white;
+  opacity: .9;
+  font-size: .9em;
+  text-align: left;
+  margin-bottom: .4em;
+}

@@ -1,0 +1,20 @@
+.stage {
+  display: flex;
+}
+
+.stage-panel {
+
+  background-color: $color-ultraviolet;
+  padding: 1em;
+  margin-left: 1em;
+
+  .button {
+    width: 100%;
+  }
+
+  // input,
+  // .button {
+  //   width: 100%;
+  // }
+
+}
