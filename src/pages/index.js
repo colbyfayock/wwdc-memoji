@@ -4,6 +4,9 @@ import Helmet from 'react-helmet';
 import Layout from 'components/Layout';
 import Container from 'components/Container';
 
+import defaultMemoji from 'assets/images/colby-memoji.jpg';
+import wwdcOverlay from 'assets/images/wwdc-overlay.png';
+
 const canvasWidth = 600;
 const canvasHeight = 600;
 const memojiDefaultWidth = 400;
@@ -28,7 +31,7 @@ const IndexPage = () => {
 
   const memojiImgRef = useRef();
   const [memoji, updateMemoji] = useState({
-    url: '/images/colby-memoji.jpg',
+    url: defaultMemoji,
     width: memojiDefaultWidth
   });
 
@@ -67,7 +70,7 @@ const IndexPage = () => {
 
     async function loadImages() {
       const overlay = await promiseToLoadImage({
-        url: '/images/wwdc-overlay.png'
+        url: wwdcOverlay
       });
 
       const overlayImg = overlay?.img;
