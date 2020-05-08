@@ -1,8 +1,18 @@
 .button {
+
   display: inline-block;
   color: white;
   text-decoration: none;
   font-weight: bold;
   background-color: $color-blue;
   padding: .8em 1em;
+
+  &:hover {
+    background-color: lighten($color-blue, 4);
+  }
+
+  &:active {
+    background-color: darken($color-blue, 4);
+  }
+
 }

@@ -4,10 +4,12 @@ import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
 
 import { promiseToLoadImage } from 'lib/images';
+import { drawImages } from 'lib/canvas';
 
 import Layout from 'components/Layout';
 import Container from 'components/Container';
 import Dropzone from 'components/Dropzone';
+import Canvas from 'components/Canvas';
 
 import defaultMemojiUrl from 'assets/images/colby-memoji.jpg';
 import wwdcOverlay from 'assets/images/wwdc-overlay.png';
@@ -63,11 +65,26 @@ const IndexPage = () => {
       const canvas = canvasRef?.current;
       const context = canvas.getContext('2d');
 
-      context.fillStyle = 'black';
-      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      context.drawImage(memojiImg, memoji?.x, memoji?.y, memoji?.width, memoji?.height)
-      context.drawImage(overlayImg, 0, 0, canvasWidth, canvasHeight)
+      const images = [
+        {
+          image: memojiImg,
+          ...memoji
+        },
+        {
+          image: overlayImg,
+          x: 0,
+          y: 0,
+          width: canvasWidth,
+          height: canvasHeight
+        }
+      ]
+
+      drawImages({
+        context,
+        images
+      });
 
       const url = canvasRef?.current.toDataURL('image/jpeg', 1.0);
 
@@ -76,6 +93,8 @@ const IndexPage = () => {
 
     loadImages();
   }, [canvasRef, memojiImgRef, memoji]);
+
+
 
   /**
    * handleOnChange
@@ -171,7 +190,7 @@ const IndexPage = () => {
       </Helmet>
       <Container type="full">
         <div className="stage">
-          <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}  />
+          <Canvas ref={canvasRef} width={canvasWidth} height={canvasHeight} fillStyle="black"  />
           <div className="stage-panel">
             <form>
               <div className="form-row">
@@ -188,7 +207,7 @@ const IndexPage = () => {
                   onChange={handleOnChangeSize} />
               </div>
               <div className="form-row form-row-range">
-                <label htmlFor="x">Position X (Distance from left edge)</label>
+                <label htmlFor="x">Position X (From left edge)</label>
                 <InputRange
                   name="x"
                   maxValue={200}
@@ -198,7 +217,7 @@ const IndexPage = () => {
                   onChange={handleOnChangeX} />
               </div>
               <div className="form-row form-row-range">
-                <label htmlFor="y">Position Y (Distance from top edge)</label>
+                <label htmlFor="y">Position Y (From top edge)</label>
                 <InputRange
                   name="y"
                   maxValue={200}
