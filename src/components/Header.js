@@ -12,7 +12,7 @@ const Header = () => {
         </h1>
         <ul>
           <li>
-            <a href="https://developer.apple.com/wwdc20/">
+            <a href="https://developer.apple.com/wwdc21/">
               <FaApple /> WWDC
             </a>
           </li>
